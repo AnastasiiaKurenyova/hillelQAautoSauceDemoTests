@@ -40,6 +40,10 @@ public class LoginPage extends BasePage{
         return this;
     }
 
+    public boolean isLoginPageVisible() {
+        return WaiterHelper.waitForVisibilityOf(driver, loginButton).isDisplayed();
+    }
+
     public String getErrorPopupText() {
         WaiterHelper.waitForVisibilityOf(driver, errorPopup);
         return errorPopup.getText();
