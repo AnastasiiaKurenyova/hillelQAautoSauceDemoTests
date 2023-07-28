@@ -1,12 +1,13 @@
 package ua.ithillel.driver;
 
 import org.openqa.selenium.WebDriver;
+import ua.ithillel.driver.factory.LocalWebDriverFactory;
 
 public class DriverSingleton {
 
     private static DriverSingleton instance;
 
-    private WebDriver driver;
+    private static WebDriver driver;
 
     private DriverSingleton() {
     }
@@ -19,11 +20,11 @@ public class DriverSingleton {
     }
 
     public static WebDriver getDriver() {
-        return getInstance().driver;
-    }
-
-    public static void setDriver(WebDriver driver) {
-        getInstance().driver = driver;
+        if (null == driver) {
+            LocalWebDriverFactory localWebDriverFactory = new LocalWebDriverFactory();
+            driver = localWebDriverFactory.getDriver(WebDriverType.CHROME);
+        }
+        return driver;
     }
 
     public static void clearDriver() {
