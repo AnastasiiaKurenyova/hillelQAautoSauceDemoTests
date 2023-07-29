@@ -19,7 +19,7 @@ public class CartPage extends BasePage {
     public List<Double> getProductPriceList() {
         List<Double> productPriceDoubleList = new ArrayList<>();
         for (int i = 0; i < productPriceList.size(); i++) {
-            double productPrice = ProductItem.getPriceFromElement(productPriceList.get(i));
+            double productPrice = ProductItem.getPriceFromElementText(productPriceList.get(i).getText());
             productPriceDoubleList.add(productPrice);
         }
         return productPriceDoubleList;

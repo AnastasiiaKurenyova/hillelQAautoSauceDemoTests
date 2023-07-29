@@ -3,7 +3,6 @@ package ua.ithillel.pages;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import ua.ithillel.model.Product;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -22,40 +21,28 @@ public class ProductItem extends BasePage {
     @FindBy(xpath = "//div[@class='inventory_item_price']")
     private WebElement productPrice;
 
-    @FindBy(xpath = "//div[@class='pricebar']/button")
-    private WebElement productAddButton;
+    private WebElement parentElement;
 
-    public ProductItem(WebElement productElement) {
-        PageFactory.initElements(productElement, this);
-    }
+    private double price;
 
-    public Product getProduct() {
-        return new Product(
-                productPicture.getText(),
-                productLabel.getText(),
-                productDescription.getText(),
-                getPriceFromElement(productPrice)
-        );
+    public ProductItem(WebElement parentElement) {
+        PageFactory.initElements(parentElement, this);
+        this.parentElement = parentElement;
+        this.price = getPriceFromElementText(parentElement.getText());
     }
 
     public double getPrice() {
-        return getPriceFromElement(productPrice);
+        return price;
     }
 
-    public ProductItem clickAddButton() {
-        productAddButton.click();
-        return this;
-    }
-
-    public static double getPriceFromElement(WebElement element) {
+    public static double getPriceFromElementText(String text) {
         double result = -1;
-        Pattern pattern = Pattern.compile("[\\d]+.[\\d]+");
-        Matcher matcher = pattern.matcher(element.getText());
+        Pattern pattern = Pattern.compile("[$]{1}[\\d]+.[\\d]+");
+        Matcher matcher = pattern.matcher(text);
 
         if (matcher.find()) {
-            result = Double.parseDouble(matcher.group());
+            result = Double.parseDouble(matcher.group().substring(1));
         }
         return result;
     }
-
 }

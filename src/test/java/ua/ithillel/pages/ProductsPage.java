@@ -4,7 +4,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import ua.ithillel.model.Product;
 import ua.ithillel.waiters.WaiterHelper;
 
 import java.util.ArrayList;
@@ -46,36 +45,25 @@ public class ProductsPage extends BasePage {
         List<ProductItem> productItemList = new ArrayList<>();
 
         for (int i = 0; i < productsElementList.size(); i++) {
-            productItemList.add(new ProductItem(productsElementList.get(i)));
+            ProductItem productItem = new ProductItem(productsElementList.get(i));
+            productItemList.add(productItem);
         }
         return productItemList;
     }
 
-    public List<Product> getProductList() {
-        List<ProductItem> productItemList = getProductItemList();
-        List<Product> productList = new ArrayList<>();
-
-        for (int i = 0; i < productItemList.size(); i++) {
-            Product product = productItemList.get(i).getProduct();
-            productList.add(product);
-        }
-
-        return productList;
-    }
-
     public List<Double> getProductPriceList() {
         List<Double> productPriceListDouble = new ArrayList<>();
-        List<Product> productList = getProductList();
+        List<ProductItem> productItemList = getProductItemList();
 
-        for (int i = 0; i < productList.size(); i++) {
-            double productPrice = ProductItem.getPriceFromElement(productPriceList.get(i));
+        for (int i = 0; i < productItemList.size(); i++) {
+            double productPrice = productItemList.get(i).getPrice();
             productPriceListDouble.add(productPrice);
         }
         return productPriceListDouble;
     }
 
     public boolean isProductItemListEmpty() {
-        List<ProductItem> productItemList = this.getProductItemList();
+        List<ProductItem> productItemList = getProductItemList();
         return !(productItemList.size() > 0);
     }
 
