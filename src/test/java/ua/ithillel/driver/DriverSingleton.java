@@ -3,6 +3,8 @@ package ua.ithillel.driver;
 import org.openqa.selenium.WebDriver;
 import ua.ithillel.driver.factory.LocalWebDriverFactory;
 
+import java.net.MalformedURLException;
+
 public class DriverSingleton {
 
     private static DriverSingleton instance;
@@ -19,10 +21,9 @@ public class DriverSingleton {
         return instance;
     }
 
-    public static WebDriver getDriver() {
+    public static WebDriver getDriver() throws MalformedURLException {
         if (null == driver) {
-            LocalWebDriverFactory localWebDriverFactory = new LocalWebDriverFactory();
-            driver = localWebDriverFactory.getDriver(WebDriverType.CHROME);
+            driver = WebDriverRemote.getRemoteDriver(WebDriverType.CHROME);
         }
         return driver;
     }
