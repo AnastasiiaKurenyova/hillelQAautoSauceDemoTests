@@ -6,6 +6,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
 import ua.ithillel.waiters.WaiterHelper;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,7 @@ public class ProductsPage extends BasePage {
     @FindBy(xpath = "//button[@id='react-burger-menu-btn']")
     private WebElement burgerMenuButton;
 
-    public ProductsPage() {
+    public ProductsPage() throws MalformedURLException{
         PageFactory.initElements(driver, this);
     }
 
@@ -41,7 +42,7 @@ public class ProductsPage extends BasePage {
         return productsLabel.getText();
     }
 
-    public List<ProductItem> getProductItemList() {
+    public List<ProductItem> getProductItemList() throws MalformedURLException {
         List<ProductItem> productItemList = new ArrayList<>();
 
         for (int i = 0; i < productsElementList.size(); i++) {
@@ -51,7 +52,7 @@ public class ProductsPage extends BasePage {
         return productItemList;
     }
 
-    public List<Double> getProductPriceList() {
+    public List<Double> getProductPriceList() throws MalformedURLException{
         List<Double> productPriceListDouble = new ArrayList<>();
         List<ProductItem> productItemList = getProductItemList();
 
@@ -62,7 +63,7 @@ public class ProductsPage extends BasePage {
         return productPriceListDouble;
     }
 
-    public boolean isProductItemListEmpty() {
+    public boolean isProductItemListEmpty() throws MalformedURLException{
         List<ProductItem> productItemList = getProductItemList();
         return !(productItemList.size() > 0);
     }
@@ -79,12 +80,12 @@ public class ProductsPage extends BasePage {
         return this;
     }
 
-    public CartPage clickCartButton() {
+    public CartPage clickCartButton() throws MalformedURLException{
         WaiterHelper.waitForVisibilityOf(driver, cartButton).click();
         return new CartPage();
     }
 
-    public BurgerMenuPage clickBurgerMenuButton() {
+    public BurgerMenuPage clickBurgerMenuButton() throws MalformedURLException{
         WaiterHelper.waitForVisibilityOf(driver, burgerMenuButton).click();
         return new BurgerMenuPage();
     }

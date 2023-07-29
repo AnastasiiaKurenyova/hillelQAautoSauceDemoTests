@@ -8,6 +8,7 @@ import ua.ithillel.model.User;
 import ua.ithillel.model.UserCreator;
 import ua.ithillel.pages.LoginPage;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public class CartTest extends BaseTest {
     @Test
     @Tag("Regression")
     @DisplayName("Verify Products In Cart Test")
-    public void verifyProductsInCartTest() {
+    public void verifyProductsInCartTest() throws MalformedURLException {
         User testUser = UserCreator.createStandartUser();
 
         List<Double> actualProductPriceList = new LoginPage()

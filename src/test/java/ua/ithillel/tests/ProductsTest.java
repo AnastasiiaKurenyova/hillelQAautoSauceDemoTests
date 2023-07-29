@@ -1,5 +1,6 @@
 package ua.ithillel.tests;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
@@ -17,7 +18,7 @@ public class ProductsTest extends BaseTest{
     @Test
     @DisplayName("Verify All Products Are Present Test")
     @Tag("Regression")
-    public void verifyAllProductsPresentTest() {
+    public void verifyAllProductsPresentTest() throws MalformedURLException {
         User testUser = UserCreator.createStandartUser();
 
         ProductsPage productsPage = new LoginPage()
@@ -32,7 +33,7 @@ public class ProductsTest extends BaseTest{
     @Test
     @DisplayName("Verify All Products Sorted By Price Asc Test")
     @Tag("Regression")
-    public void verifyAllProductsSortedByPriceAscTest2() {
+    public void verifyAllProductsSortedByPriceAscTest2() throws MalformedURLException{
         User testUser = UserCreator.createStandartUser();
 
         List<Double> actualProductPriceList = new LoginPage()

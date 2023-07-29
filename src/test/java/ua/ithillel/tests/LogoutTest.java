@@ -7,13 +7,15 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 import ua.ithillel.pages.LoginPage;
 
+import java.net.MalformedURLException;
+
 public class LogoutTest extends BaseTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = {"/validCreds.csv"}, delimiter = ';')
     @DisplayName("Verify Logout Positive Test")
     @Tag("Regression")
-    public void verifyLogoutPositiveTest(String username, String password) {
+    public void verifyLogoutPositiveTest(String username, String password) throws MalformedURLException {
 
         boolean isLoginPageVisible = new LoginPage()
                 .openPage()

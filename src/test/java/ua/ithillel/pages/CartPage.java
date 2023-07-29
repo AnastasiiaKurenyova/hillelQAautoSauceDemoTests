@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class CartPage extends BasePage {
     @FindBy(xpath = "//div[@class='inventory_item_price']")
     private List<WebElement> productPriceList;
 
-    public CartPage() {
+    public CartPage() throws MalformedURLException {
         PageFactory.initElements(driver, this);
     }
 

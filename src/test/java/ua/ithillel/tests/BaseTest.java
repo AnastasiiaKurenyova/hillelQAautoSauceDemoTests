@@ -5,6 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
 import ua.ithillel.driver.DriverSingleton;
 
+import java.net.MalformedURLException;
 import java.time.Duration;
 
 public class BaseTest {
@@ -12,7 +13,7 @@ public class BaseTest {
     protected WebDriver driver;
 
     @BeforeEach
-    public void browserSetup() {
+    public void browserSetup() throws MalformedURLException {
         driver = DriverSingleton.getDriver();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));

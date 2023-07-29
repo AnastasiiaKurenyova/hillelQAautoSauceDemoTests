@@ -4,6 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.net.MalformedURLException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -25,7 +26,7 @@ public class ProductItem extends BasePage {
 
     private double price;
 
-    public ProductItem(WebElement parentElement) {
+    public ProductItem(WebElement parentElement)throws MalformedURLException {
         PageFactory.initElements(parentElement, this);
         this.parentElement = parentElement;
         this.price = getPriceFromElementText(parentElement.getText());

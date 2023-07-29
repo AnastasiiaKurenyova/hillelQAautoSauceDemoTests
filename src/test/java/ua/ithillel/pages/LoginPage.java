@@ -5,6 +5,8 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import ua.ithillel.waiters.WaiterHelper;
 
+import java.net.MalformedURLException;
+
 public class LoginPage extends BasePage{
 
     public final String HOMEPAGE = "https://www.saucedemo.com";
@@ -21,7 +23,7 @@ public class LoginPage extends BasePage{
     @FindBy(xpath = "//*[@data-test='error']")
     private WebElement errorPopup;
 
-    public LoginPage() {
+    public LoginPage() throws MalformedURLException {
         PageFactory.initElements(driver, this);
     }
 
@@ -49,7 +51,7 @@ public class LoginPage extends BasePage{
         return errorPopup.getText();
     }
 
-    public ProductsPage clickLoginButton() {
+    public ProductsPage clickLoginButton() throws MalformedURLException{
         WaiterHelper.waitForVisibilityOf(driver, loginButton).click();
         return new ProductsPage();
     }
